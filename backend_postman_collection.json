@@ -1,0 +1,198 @@
+{
+  "info": {
+    "_postman_id": "c4f8b747-0380-451d-b760-f156ae5dc159",
+    "name": "evoltsoft_assignment",
+    "description": "Postman collection for the backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18332453"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new user."
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"login\": \"test@test.com\",\n    \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login an existing user and get a JWT token. Use either username or email for the 'login' field."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for user authentication"
+    },
+    {
+      "name": "Charging Stations",
+      "item": [
+        {
+          "name": "Create Station",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Delhi Charger\",\n    \"location\": {\n        \"latitude\": 28.7041,\n        \"longitude\": 77.1025\n    },\n    \"status\": \"Active\",\n    \"powerOutput\": 50,\n    \"connectorType\": \"Type 0\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations"]
+            },
+            "description": "Create a new charging station. Requires authentication."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Stations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/stations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations"]
+            },
+            "description": "Retrieve a list of all charging stations."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Station by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/stations/station_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations", "station_id"]
+            },
+            "description": "Retrieve a specific charging station by its ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Station",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Central Park Charger\",\n    \"status\": \"Inactive\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/stations/YOUR_STATION_ID",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations", "YOUR_STATION_ID"]
+            },
+            "description": "Update an existing charging station. Requires authentication. Only include fields to be updated."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Station",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stations/station_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stations", "station_id"]
+            },
+            "description": "Delete a charging station by its ID. Requires authentication."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing charging stations"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://evoltsoft-assignment.vercel.app/",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
